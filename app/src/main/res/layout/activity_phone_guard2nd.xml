@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kk.mymobilesafe.activity.PhoneGuard2ndActivity">
+
+    <TextView
+        style="@style/Title_style"
+        android:text="2.手机卡绑定" />
+
+    <TextView
+        style="@style/phone_guard_setting_listItem"
+        android:text="通过绑定SIM卡：" />
+
+    <TextView
+        style="@style/phone_guard_setting_listItem"
+        android:text="下次重启手机如果发现SIM序列号不符" />
+
+    <TextView
+        style="@style/phone_guard_setting_listItem"
+        android:text="将会自动发送短信通知指定的联系人" />
+
+    <com.kk.mymobilesafe.view.SettingCheckBoxItemView xmlns:mobilesafe="http://schemas.android.com/apk/res/com.kk.mymobilesafe"
+        android:id="@+id/scbiv_bindSIMcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:close="SIM没有绑定"
+        mobilesafe:itemTitle="点击绑定SIM卡"
+        mobilesafe:open="SIM卡已邦定" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_off" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_off" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/bind" />
+
+        <Button
+            android:id="@+id/btn_PhoneGuard2st_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_click_sytle"
+            android:drawableRight="@drawable/next"
+            android:text="下一页"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btn_PhoneGuard2st_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_click_sytle"
+            android:drawableLeft="@drawable/previous"
+            android:text="上一页"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

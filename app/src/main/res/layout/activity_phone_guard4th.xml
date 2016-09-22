@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kk.mymobilesafe.activity.PhoneGuard4thActivity">
+
+    <TextView
+        style="@style/Title_style"
+        android:text="4.开启防盗保护即可" />
+
+    <LinearLayout
+        android:id="@+id/ll_phoneguard4th_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_phonguard4th_openGuard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tv_phonGuard4th_memo"
+            style="@style/phone_guard_setting_listItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你没有开启防盗保护" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/phone" />
+
+        <Button
+            android:id="@+id/btn_PhoneGuard4st_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_click_sytle"
+            android:drawableRight="@drawable/next"
+            android:text="设置完成"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btn_PhoneGuard4st_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_click_sytle"
+            android:drawableLeft="@drawable/previous"
+            android:text="上一页"
+            android:textSize="25sp" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

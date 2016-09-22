@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SettingCenterActivity">
+
+    <TextView
+        style="@style/Title_style"
+        android:background="#eaf206"
+        android:text="设置中心" />
+
+    <com.kk.mymobilesafe.view.SettingCheckBoxItemView xmlns:mobilesafe="http://schemas.android.com/apk/res/com.kk.mymobilesafe"
+        android:id="@+id/scbiv_autoupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:close="关闭"
+        mobilesafe:itemTitle="自动更新"
+        mobilesafe:open="开启">
+
+    </com.kk.mymobilesafe.view.SettingCheckBoxItemView>
+</LinearLayout>

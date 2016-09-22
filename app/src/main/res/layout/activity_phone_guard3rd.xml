@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kk.mymobilesafe.activity.PhoneGuard3rdActivity">
+
+    <TextView
+        style="@style/Title_style"
+        android:text="3.设置安全号码" />
+
+    <TextView
+        style="@style/phone_guard_setting_listItem"
+        android:text="SIM卡变更后" />
+
+    <TextView
+        style="@style/phone_guard_setting_listItem"
+        android:text="报警短信会发给安全号码" />
+
+    <EditText
+        android:id="@+id/et_phoneGuard3rd_inputSafeNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="9dp"
+        android:hint="安全手机号码" />
+
+    <Button
+        android:id="@+id/btn_phoneGuard3rd_chooseContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="选择联系人" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_on" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/btn_star_big_off" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/phone" />
+
+        <Button
+            android:id="@+id/btn_PhoneGuard3st_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_click_sytle"
+            android:drawableRight="@drawable/next"
+            android:text="下一页"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btn_PhoneGuard3st_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_click_sytle"
+            android:drawableLeft="@drawable/previous"
+            android:text="上一页"
+            android:textSize="25sp" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

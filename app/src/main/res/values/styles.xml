@@ -8,4 +8,39 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Title_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">#0fb</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="setting_item_style" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+    <style name="phone_guard_setting_listItem">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+
+    <style name="phoneGuard_overView_function_item">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:drawableLeft">@android:drawable/star_big_on</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

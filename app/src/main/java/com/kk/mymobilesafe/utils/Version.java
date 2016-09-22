@@ -29,9 +29,9 @@ import java.net.URL;
  * Created by Administrator on 2016/9/19.
  */
 public class Version {
+    private static final String TAG = "main";
     Activity activity;
     Handler mHandler;
-    private static final String TAG = "main";
 
     /**
      * 适用除downloadAPK方法以外的方法是用
@@ -98,6 +98,8 @@ public class Version {
                     URL url = null;
                     try {
                         url = new URL(serverPath);
+                        // 等 LaunacherActivity的淡出动画显示完
+                        Thread.sleep(3000);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                         connection.setReadTimeout(3*1000);
                         connection.setConnectTimeout(3*1000);
@@ -117,7 +119,7 @@ public class Version {
                             versionBean.versionCode = jsonObject.getString("versionCode");
                             versionBean.downloadUrl = jsonObject.getString("downloadUrl");
 
-                            Thread.sleep(2000);
+
                             // 返回结果信息 给 Handler
                             Message msg=Message.obtain();
                             int lastestVersonCode=Integer.parseInt(versionBean.versionCode);
@@ -155,15 +157,8 @@ public class Version {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } finally {
-                        try {
-                            Thread.sleep(4000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         IOsUtil.closeALL(outputStream,inputStream);
                     }
-
-
                 }
             }.start();
     }

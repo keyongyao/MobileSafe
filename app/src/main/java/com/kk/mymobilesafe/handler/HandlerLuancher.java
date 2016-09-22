@@ -2,16 +2,11 @@ package com.kk.mymobilesafe.handler;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
-import android.content.pm.PackageManager;
-import android.icu.util.ULocale;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
-import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.kk.mymobilesafe.activity.HomeActivity;
@@ -23,13 +18,13 @@ import com.kk.mymobilesafe.utils.LogCat;
 import com.kk.mymobilesafe.utils.Version;
 
 import java.io.File;
-import java.util.Locale;
 
 /**
  *
  * Created by Administrator on 2016/9/20.
  */
 public class HandlerLuancher extends Handler {
+    private static final String TAG = "main";
     Activity mActivity;
     Handler mHandler;
     VersionBean versionBean;
@@ -58,7 +53,6 @@ public class HandlerLuancher extends Handler {
         this.mActivity = mActivity;
     }
 
-    private static final String TAG = "main";
     @Override
 
     public void handleMessage(Message msg) {
@@ -74,19 +68,19 @@ public class HandlerLuancher extends Handler {
             }
             // 没更新版本呢
             case MySignal.Update.HAS_NEW_VERSION_NO:{
-                Toast.makeText(mActivity.getApplicationContext(), "这已经是最新版本呢", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), "已经是最新版本", Toast.LENGTH_SHORT).show();
                 goToHomeActivity();
                 break;
             }
             // 检查版本出错
             case MySignal.Update.HAS_NEW_VERSION_ERROR:{
-                Toast.makeText(mActivity.getApplicationContext(), "获取新版本错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), "连接服务器失败", Toast.LENGTH_SHORT).show();
                 goToHomeActivity();
                 break;
             }
             // 用户点击确定更新按钮
             case MySignal.Update.YES:{
-                Toast.makeText(mActivity, "正在为你更新", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, "正在更新...", Toast.LENGTH_SHORT).show();
                 String fileName=versionBean.downloadUrl.substring(versionBean.downloadUrl.lastIndexOf("/"),
                         versionBean.downloadUrl.length());
                 File file=new File(Environment.getExternalStorageDirectory(),fileName);
@@ -98,7 +92,7 @@ public class HandlerLuancher extends Handler {
             // 用户点击取消跟新按钮
             case MySignal.Update.NO:{
                 // 如果用户取消更新 则进入 HomeActivity 并且关闭当前 Actiivty
-                Toast.makeText(mActivity, "已为你取消更新", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, "已取消更新", Toast.LENGTH_SHORT).show();
                 goToHomeActivity();
                 break;
             }
