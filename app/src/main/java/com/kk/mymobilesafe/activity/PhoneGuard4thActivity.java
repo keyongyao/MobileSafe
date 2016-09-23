@@ -1,9 +1,7 @@
 package com.kk.mymobilesafe.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,12 +13,32 @@ import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 
-public class PhoneGuard4thActivity extends AppCompatActivity {
+public class PhoneGuard4thActivity extends PhoneGuardBasicActivity {
     Button btnFinishPage, btnPreviousPage;
     CheckBox cbIsOpenGuard;
     TextView tvMemo;
-    Activity mActivity;
     LinearLayout ll_checkbox;
+
+    @Override
+    void nextPage() {
+        if (cbIsOpenGuard.isChecked()) {
+            SharedPreferenceUtil.putBoolean(this, Constant.PhoneGuard.ALLSETTINGDONE, true);
+            Toast.makeText(this, "你已成功开启防盗", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "你没开启防盗", Toast.LENGTH_SHORT).show();
+            SharedPreferenceUtil.putBoolean(this, Constant.PhoneGuard.HADSET, true);
+        }
+        Intent intent = new Intent(getApplicationContext(), PhoneGuardOverViewActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    void prevousPage() {
+        Intent intent = new Intent(getApplicationContext(), PhoneGuard3rdActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +52,13 @@ public class PhoneGuard4thActivity extends AppCompatActivity {
         btnPreviousPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PhoneGuard3rdActivity.class);
-                startActivity(intent);
-                finish();
+                prevousPage();
             }
         });
         btnFinishPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PhoneGuardOverViewActivity.class);
-                startActivity(intent);
-                finish();
+                nextPage();
             }
         });
         ll_checkbox.setOnClickListener(new View.OnClickListener() {

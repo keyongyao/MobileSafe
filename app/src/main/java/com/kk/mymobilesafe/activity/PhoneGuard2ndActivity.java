@@ -3,19 +3,23 @@ package com.kk.mymobilesafe.activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 import com.kk.mymobilesafe.view.SettingCheckBoxItemView;
 
-public class PhoneGuard2ndActivity extends AppCompatActivity {
+public class PhoneGuard2ndActivity extends PhoneGuardBasicActivity {
+    /**
+     * 自定义复合View
+     */
     SettingCheckBoxItemView checkBoxItemView;
     Button btnNextPage, btnPreviouPage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +33,13 @@ public class PhoneGuard2ndActivity extends AppCompatActivity {
         btnNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PhoneGuard3rdActivity.class);
-                startActivity(intent);
-                finish();
+                nextPage();
             }
         });
         btnPreviouPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PhoneGuard1stActivity.class);
-                startActivity(intent);
-                finish();
+                prevousPage();
             }
         });
         checkBoxItemView.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +61,24 @@ public class PhoneGuard2ndActivity extends AppCompatActivity {
         checkBoxItemView.initUI(bindingSIM);
         btnNextPage = (Button) findViewById(R.id.btn_PhoneGuard2st_next);
         btnPreviouPage = (Button) findViewById(R.id.btn_PhoneGuard2st_previous);
+    }
+
+    @Override
+    void nextPage() {
+        if (!checkBoxItemView.isChecked()) {
+            Toast.makeText(this, "还没绑定SIM卡", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(getApplicationContext(), PhoneGuard3rdActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    void prevousPage() {
+        Intent intent = new Intent(getApplicationContext(), PhoneGuard1stActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

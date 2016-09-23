@@ -1,4 +1,4 @@
-package com.kk.mymobilesafe;
+package com.kk.mymobilesafe.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.kk.mymobilesafe.activity.HomeActivity;
+import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.handler.HandlerLuancher;
 import com.kk.mymobilesafe.utils.LogCat;
@@ -16,19 +16,20 @@ import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 import com.kk.mymobilesafe.utils.Version;
 
 public class LauncherActivity extends Activity {
- public    Version mVersion;
+    public Version mVersion;
     Handler mHandler;
     Activity mActivity;
     RelativeLayout root;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         //  TODO 开启日志猫
         LogCat.getSingleton().setLog_open(true);
-        mActivity=this;
-        mHandler=new HandlerLuancher(mActivity);
-        mVersion  =new Version(mHandler,mActivity);
+        mActivity = this;
+        mHandler = new HandlerLuancher(mActivity);
+        mVersion = new Version(mHandler, mActivity);
 
         initUI();
 
@@ -62,8 +63,8 @@ public class LauncherActivity extends Activity {
     }
 
     private void initUI() {
-        TextView tv_verisonCode= (TextView) findViewById(R.id.tv_version_code);
-        tv_verisonCode.setText("现在版本："+mVersion.getLocalVersionName());
+        TextView tv_verisonCode = (TextView) findViewById(R.id.tv_version_code);
+        tv_verisonCode.setText("现在版本：" + mVersion.getLocalVersionName());
         root = (RelativeLayout) findViewById(R.id.launcher_activity);
     }
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.activity.PhoneGuard1stActivity;
+import com.kk.mymobilesafe.activity.PhoneGuardOverViewActivity;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 
@@ -88,9 +89,18 @@ public class PhoneGuardPwdDialog {
                 String pwd2 = SharedPreferenceUtil.getString(mActivity, Constant.PhoneGuard.GUARDPWD);
                 if (pwd.equals(pwd2)) {
                     Toast.makeText(mActivity, "密码正确，解锁成功", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(mActivity.getApplicationContext(), PhoneGuard1stActivity.class);
-                    mActivity.startActivity(intent);
-                    dialog.dismiss();
+                    // 如果用户把所有设置都配置了 进入 手机防盗总览页面
+                    if (SharedPreferenceUtil.getBoolean(mActivity.getApplicationContext(), Constant.PhoneGuard.HADSET)) {
+                        Intent intent = new Intent(mActivity.getApplicationContext(), PhoneGuardOverViewActivity.class);
+                        mActivity.startActivity(intent);
+                        dialog.dismiss();
+                    } else {
+                        // 初次进入设置页面
+                        Intent intent = new Intent(mActivity.getApplicationContext(), PhoneGuard1stActivity.class);
+                        mActivity.startActivity(intent);
+                        dialog.dismiss();
+                    }
+
                 } else if (!pwd.equals(pwd2)) {
                     etFirstPWd.setError("密码错误");
                 }

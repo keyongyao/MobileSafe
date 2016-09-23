@@ -2,7 +2,6 @@ package com.kk.mymobilesafe.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.kk.mymobilesafe.R;
@@ -10,7 +9,7 @@ import com.kk.mymobilesafe.adapter.NineGridsAdapter;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.listener.GridItemListener;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Activity {
     GridView mGridView;
     Activity mActivity;
     @Override

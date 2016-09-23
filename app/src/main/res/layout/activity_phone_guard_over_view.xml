@@ -80,28 +80,47 @@
 
     </LinearLayout>
 
-    <Button
-        style="@style/setting_item_style"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/gradient_box"
         android:text="功能简介"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/tv_location"
         style="@style/phoneGuard_overView_function_item"
+        android:clickable="true"
         android:text="GPS追踪：#*location*#" />
 
     <TextView
+        android:id="@+id/tv_playAlarm"
         style="@style/phoneGuard_overView_function_item"
+
+        android:clickable="true"
         android:text="播放报警音乐：#*alarmMusic*#" />
 
     <TextView
+        android:id="@+id/tv_active_deviceManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_box"
+        android:clickable="true"
+        android:text="点我激活下面功能" />
+
+    <TextView
+        android:id="@+id/tv_wipedata"
         style="@style/phoneGuard_overView_function_item"
+
+        android:clickable="true"
         android:text="远程删除数据：#*wipedata*#" />
 
     <TextView
+        android:id="@+id/tv_locakscreen"
         style="@style/phoneGuard_overView_function_item"
+
+        android:clickable="true"
         android:text="远程锁屏：#*lockscreen*#" />
 
 

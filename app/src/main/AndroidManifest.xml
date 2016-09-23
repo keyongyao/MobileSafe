@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -31,7 +35,28 @@
         <activity android:name=".activity.PhoneGuard1stActivity" />
         <activity android:name=".activity.PhoneGuard2ndActivity" />
         <activity android:name=".activity.PhoneGuard3rdActivity" />
-        <activity android:name=".activity.PhoneGuard4thActivity"></activity>
+        <activity android:name=".activity.PhoneGuard4thActivity" />
+        <!-- 注册短信接收者-->
+        <receiver android:name=".recevier.RecevieSMS">
+            <intent-filter>
+                <action android:name="android.provier.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <!-- 注册设备管理器的广播接收者-->
+        <receiver
+            android:name=".recevier.DeviceAdminSample"
+            android:description="@string/sample_device_admin_description"
+            android:label="@string/sample_device_admin"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_sample" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+
+        </receiver>
+
     </application>
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 </manifest>

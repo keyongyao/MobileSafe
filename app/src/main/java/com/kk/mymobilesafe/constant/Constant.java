@@ -34,6 +34,9 @@ public class Constant {
         public static final String SAFENUMBER = "safeNumber";
         public static final String OPENGUARD = "isOPenGuard";
         public static final String SIMSERIALNUMBER = "simSerialNumber";
+        public static final String ALLSETTINGDONE = "allsettingdone";
+        public static final String HADSET = "hadset";
+
 
     }
 

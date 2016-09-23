@@ -3,4 +3,29 @@
     <string name="scrolleTV">
         绛帻鸡人报晓筹，尚衣方进翠云裘。九天阊阖开宫殿，万国衣冠拜冕旒。日色才临仙掌动，香烟欲傍衮龙浮。朝罢须裁五色诏，佩声归到凤池头。
     </string>
+    <string name="admin_receiver_status">
+        MobileSafe设备管理状态
+    </string>
+    <string name="admin_receiver_status_enabled">
+        MobileSafe设备管理启用
+    </string>
+    <string name="admin_receiver_status_disable_warning">
+        MobileSafe设备管理禁用警告
+    </string>
+    <string name="admin_receiver_status_disabled">
+        MobileSafe设备管理禁用
+    </string>
+    <string name="admin_receiver_status_pw_changed">
+        我的设备管理密码改变
+    </string>
+    <string name="sample_device_admin">
+        MobileSafe设备管理
+    </string>
+    <string name="sample_device_admin_description">
+        功能如下:\n
+        远程锁屏\n
+        远程设置锁屏密码\n
+        远程擦除数据\n
+    </string>
+
 </resources>

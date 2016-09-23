@@ -1,8 +1,8 @@
 package com.kk.mymobilesafe.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.kk.mymobilesafe.R;
@@ -10,7 +10,7 @@ import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 import com.kk.mymobilesafe.view.SettingCheckBoxItemView;
 
-public class SettingCenterActivity extends AppCompatActivity {
+public class SettingCenterActivity extends Activity {
     SettingCheckBoxItemView autoUpdateView;
     Context mContext;
 
