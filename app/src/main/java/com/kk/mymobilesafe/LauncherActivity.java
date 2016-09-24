@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.kk.mymobilesafe.activity.HomeActivity;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.handler.HandlerLuancher;
+import com.kk.mymobilesafe.service.ShowLocationService;
 import com.kk.mymobilesafe.utils.LogCat;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 import com.kk.mymobilesafe.utils.Version;
@@ -31,7 +32,16 @@ public class LauncherActivity extends Activity {
         mVersion  =new Version(mHandler,mActivity);
 
         initUI();
+        openService();
 
+    }
+
+    private void openService() {
+        // 打开  来电显示归属地的服务
+        boolean openincommingShowLocation = SharedPreferenceUtil.getBoolean(getApplicationContext(), Constant.SettingCenter.INCOMMINGSHOWLOCATION);
+        if (openincommingShowLocation) {
+            startService(new Intent(getApplicationContext(), ShowLocationService.class));
+        }
     }
 
     @Override

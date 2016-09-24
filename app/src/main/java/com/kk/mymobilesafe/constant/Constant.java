@@ -36,9 +36,19 @@ public class Constant {
         public static final String SIMSERIALNUMBER = "simSerialNumber";
         public static final String ALLSETTINGDONE = "allsettingdone";
         public static final String HADSET = "hadset";
-
-
     }
+
+    public static class SettingCenter {
+        public static final String INCOMMINGSHOWLOCATION = "openShowLocation";
+        public static final String[] STYLE = {"蓝色", "灰色", "青色", "橙色", "透明"};
+        public static final int[] STYLEID = {R.drawable.call_locate_blue,
+                R.drawable.call_locate_gray,
+                R.drawable.call_locate_green,
+                R.drawable.call_locate_orange,
+                R.drawable.call_locate_white};
+        public static final String CHOOSESTYLRID = "chooseStyleID";
+    }
+
 
 
 }

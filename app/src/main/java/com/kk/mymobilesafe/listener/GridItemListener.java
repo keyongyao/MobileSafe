@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.kk.mymobilesafe.activity.AToolsActivity;
 import com.kk.mymobilesafe.activity.SettingCenterActivity;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.dialog.PhoneGuardPwdDialog;
@@ -73,7 +74,7 @@ public class GridItemListener implements AdapterView.OnItemClickListener {
             }
             case "高级工具": {
                 logCat.i(TAG, "GridItemListener.onItemClick: 高级工具");
-
+                mActivity.startActivity(new Intent(mActivity, AToolsActivity.class));
                 break;
             }
             case "设置中心": {

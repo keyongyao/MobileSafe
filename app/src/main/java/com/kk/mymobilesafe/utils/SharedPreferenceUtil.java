@@ -59,4 +59,27 @@ public class SharedPreferenceUtil {
         return preferences.getString(key, "");
     }
 
+    /**
+     * @param context
+     * @param key
+     * @param value
+     * @return
+     */
+    public static boolean putInt(Context context, String key, int value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        return editor.commit();
+    }
+
+    /**
+     * @param context
+     * @param key
+     * @return
+     */
+    public static int getInt(Context context, String key) {
+        SharedPreferences preferences = context.getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+        return preferences.getInt(key, 0);
+    }
+
 }

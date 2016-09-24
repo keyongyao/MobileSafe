@@ -33,4 +33,8 @@ public class MySignal {
         public final static int HAS_NEW_VERSION_NO=2003;
         public final static int HAS_NEW_VERSION_ERROR=2004;
     }
+
+    public static class ATool {
+        public final static int QUERYRESULT = 3000;
+    }
 }

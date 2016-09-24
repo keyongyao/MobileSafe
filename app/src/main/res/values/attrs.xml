@@ -6,4 +6,9 @@
         <attr name="close" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="com.kk.mymobilesafe.view.SettingChooseView">
+        <attr name="title" format="string" />
+        <attr name="subTitle" format="string" />
+    </declare-styleable>
+
 </resources>

@@ -5,29 +5,27 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_setting_item_title"
+        android:id="@+id/tv_setting_choose_sub_menu_title"
         style="@style/setting_item_style"
-        android:text="自动检查更新" />
+        android:text="Title" />
 
     <TextView
-        android:id="@+id/tv_closeOropen"
+        android:id="@+id/tv_setting_choose_sub_menu_subTitle"
         style="@style/setting_item_style"
-        android:layout_below="@id/tv_setting_item_title"
-        android:text="关闭" />
+        android:layout_below="@id/tv_setting_choose_sub_menu_title"
+        android:text="subTitle" />
 
-    <CheckBox
-        android:id="@+id/cb_switch"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:clickable="false"
-        android:focusableInTouchMode="false" />
+        android:src="@drawable/jiantou1_pressed" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/tv_closeOropen"
+        android:layout_below="@id/tv_setting_choose_sub_menu_subTitle"
         android:layout_margin="3dp"
         android:background="#eb000000" />
 

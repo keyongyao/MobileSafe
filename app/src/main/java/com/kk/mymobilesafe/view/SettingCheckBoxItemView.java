@@ -38,8 +38,8 @@ public class SettingCheckBoxItemView extends RelativeLayout {
         tv_closeORopen = (TextView) findViewById(R.id.tv_closeOropen);
         cb_switch = (CheckBox) findViewById(R.id.cb_switch);
         // 取消 checkBox 从 父View中获取点击事件
-        cb_switch.setClickable(false);
-        cb_switch.setFocusableInTouchMode(false);
+        // cb_switch.setClickable(false);
+        //  cb_switch.setFocusableInTouchMode(false);
         LogCat.getSingleton().i("main", "SettingCenterItemView running");
         initAttrs(attrs);
         //  initUI();
