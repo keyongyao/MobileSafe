@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/Title_style"
+        android:text="添加黑名单" />
+
+    <EditText
+        android:id="@+id/et_blacknum_inputnum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="输入拦截的号码"
+        android:inputType="phone" />
+
+    <RadioGroup
+        android:id="@+id/rg_blacknum_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_blacknum_type_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="短信" />
+
+        <RadioButton
+            android:id="@+id/rb_blacknum_type_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="来电" />
+
+        <RadioButton
+            android:id="@+id/rb_blacknum_type_both"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="来电和短信" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_blacknum_addDialog_OK"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_click_style2"
+            android:text="确定" />
+
+        <Button
+            android:id="@+id/btn_blacknum_addDialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_click_style2"
+            android:text="取消" />
+    </LinearLayout>
+
+</LinearLayout>

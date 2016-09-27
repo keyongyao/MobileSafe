@@ -47,6 +47,9 @@ public class Constant {
                 R.drawable.call_locate_orange,
                 R.drawable.call_locate_white};
         public static final String CHOOSESTYLRID = "chooseStyleID";
+        public static final String LOCATIONX = "locationX";
+        public static final String LOCATIONY = "locationY";
+        public static final String BLACKNUMOPEN = "balckNumOpen";
     }
 
 

@@ -28,7 +28,7 @@ public class PhoneLocation {
             public void onLocationChanged(Location location) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                LogCat.getSingleton().i(TAG, "latitude:longitude" + latitude + "<-->" + longitude);
+                LogCatUtil.getSingleton().i(TAG, "latitude:longitude" + latitude + "<-->" + longitude);
             }
 
             @Override

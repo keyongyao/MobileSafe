@@ -6,6 +6,8 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
 
+import com.kk.mymobilesafe.recevier.DeviceAdminSampleRecevier;
+
 /**
  * 设备管理器功能呢
  * Created by Administrator on 2016/9/23.
@@ -19,7 +21,7 @@ public class MyDeviceManager {
 
     public MyDeviceManager(Activity activity) {
         this.mActivity = activity;
-        mDeviceAdminSample = new ComponentName(mActivity.getApplication(), com.kk.mymobilesafe.recevier.DeviceAdminSample.class);
+        mDeviceAdminSample = new ComponentName(mActivity.getApplication(), DeviceAdminSampleRecevier.class);
         mDevice = (DevicePolicyManager) mActivity.getSystemService(Service.DEVICE_POLICY_SERVICE);
 
     }

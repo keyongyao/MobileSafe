@@ -7,20 +7,21 @@ import android.media.MediaPlayer;
 import android.telephony.SmsMessage;
 
 import com.kk.mymobilesafe.R;
-import com.kk.mymobilesafe.utils.LogCat;
+import com.kk.mymobilesafe.utils.LogCatUtil;
 
 /**
  * 从短信获取手机指令
  * Created by Administrator on 2016/9/23.
  */
 
-public class RecevieSMS extends BroadcastReceiver {
+public class SMSCmdRecevier extends BroadcastReceiver {
     private static final String TAG = "main";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Object[] pdus = (Object[]) intent.getExtras().get("pdus");
         String messageBody = null;
+        LogCatUtil.getSingleton().i(TAG, "SMSCmdRecevier.onReceive: 收到短信了");
 
         for (Object oo : pdus
                 ) {
@@ -28,7 +29,6 @@ public class RecevieSMS extends BroadcastReceiver {
             //5,获取短信对象的基本信息
             String originatingAddress = sms.getOriginatingAddress();
             messageBody = sms.getMessageBody();
-            LogCat.getSingleton().i(TAG, "RecevieSMS.onReceive: 收到短信了" + originatingAddress + "  " + messageBody);
         }
 
         if (messageBody.contains("#*alarm*#")) {

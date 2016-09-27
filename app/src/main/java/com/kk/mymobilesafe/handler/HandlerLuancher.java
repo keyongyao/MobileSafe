@@ -14,8 +14,8 @@ import com.kk.mymobilesafe.bean.VersionBean;
 import com.kk.mymobilesafe.dialog.InstallationDialog;
 import com.kk.mymobilesafe.dialog.UpdateDialog;
 import com.kk.mymobilesafe.signle.MySignal;
-import com.kk.mymobilesafe.utils.LogCat;
-import com.kk.mymobilesafe.utils.Version;
+import com.kk.mymobilesafe.utils.LogCatUtil;
+import com.kk.mymobilesafe.utils.VersionUtil;
 
 import java.io.File;
 
@@ -61,7 +61,7 @@ public class HandlerLuancher extends Handler {
             // 有更新版本
             case MySignal.Update.HAS_NEW_VERSION_YES:{
                 versionBean = (VersionBean) msg.obj;
-                LogCat.getSingleton().i(TAG,versionBean.toString());
+                LogCatUtil.getSingleton().i(TAG, versionBean.toString());
                 new UpdateDialog(mActivity, versionBean, mHandler).askUpdate();
 
                 break;
@@ -84,7 +84,7 @@ public class HandlerLuancher extends Handler {
                 String fileName=versionBean.downloadUrl.substring(versionBean.downloadUrl.lastIndexOf("/"),
                         versionBean.downloadUrl.length());
                 File file=new File(Environment.getExternalStorageDirectory(),fileName);
-                new Version().downloadAPK(versionBean,file,mHandler);
+                new VersionUtil().downloadAPK(versionBean, file, mHandler);
                 // 不能 关闭当前 Activity
 
                 break;

@@ -28,7 +28,7 @@ import java.net.URL;
  * 版本的检测，下载新版本
  * Created by Administrator on 2016/9/19.
  */
-public class Version {
+public class VersionUtil {
     private static final String TAG = "main";
     Activity activity;
     Handler mHandler;
@@ -38,7 +38,7 @@ public class Version {
      * @param mHandler
      * @param activity
      */
-    public Version(Handler mHandler,Activity activity) {
+    public VersionUtil(Handler mHandler, Activity activity) {
         this.mHandler = mHandler;
         this.activity=activity;
     }
@@ -46,7 +46,7 @@ public class Version {
     /**
      *  适用 downloadAPK 方法
      */
-    public Version(){
+    public VersionUtil() {
 
     }
 
@@ -99,7 +99,6 @@ public class Version {
                     try {
                         url = new URL(serverPath);
                         // 等 LaunacherActivity的淡出动画显示完
-                        Thread.sleep(3000);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                         connection.setReadTimeout(3*1000);
                         connection.setConnectTimeout(3*1000);
@@ -154,8 +153,6 @@ public class Version {
                         Message msg=Message.obtain();
                         msg.what=MySignal.Update.HAS_NEW_VERSION_ERROR;
                         mHandler.sendMessage(msg);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     } finally {
                         IOsUtil.closeALL(outputStream,inputStream);
                     }
@@ -171,7 +168,7 @@ public class Version {
     public  void downloadAPK(VersionBean versionBean, final File saveFile, final Handler handler) {
         HttpUtils httpUtils=new HttpUtils();
         httpUtils.download(versionBean.downloadUrl, saveFile.getAbsolutePath(), new RequestCallBack<File>() {
-            LogCat logCat=LogCat.getSingleton();
+            LogCatUtil logCat = LogCatUtil.getSingleton();
             @Override
             public void onSuccess(ResponseInfo<File> responseInfo) {
               logCat.e(TAG,"下载成功",null);

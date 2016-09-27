@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kk.mymobilesafe.R;
-import com.kk.mymobilesafe.utils.LogCat;
+import com.kk.mymobilesafe.utils.LogCatUtil;
 
 /**
  * 一个设置中心菜单的条目，方便重复使用
@@ -40,7 +40,7 @@ public class SettingCheckBoxItemView extends RelativeLayout {
         // 取消 checkBox 从 父View中获取点击事件
         // cb_switch.setClickable(false);
         //  cb_switch.setFocusableInTouchMode(false);
-        LogCat.getSingleton().i("main", "SettingCenterItemView running");
+        LogCatUtil.getSingleton().i("main", "SettingCenterItemView running");
         initAttrs(attrs);
         //  initUI();
 
@@ -49,7 +49,7 @@ public class SettingCheckBoxItemView extends RelativeLayout {
     /**
      * 初始化 UI checkbox 是否打勾状态
      *
-     * @param isChecked 应该从陪孩子文件读取配置
+     * @param isChecked 应该从陪配置文件读取配置
      */
 
     public void initUI(boolean isChecked) {

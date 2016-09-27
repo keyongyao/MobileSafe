@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.kk.mymobilesafe.R;
-import com.kk.mymobilesafe.dao.QueryLocation;
+import com.kk.mymobilesafe.dao.QueryLocationDao;
 import com.kk.mymobilesafe.signle.MySignal;
 
 public class AToolsQueryLocationActivity extends Activity {
@@ -53,7 +53,7 @@ public class AToolsQueryLocationActivity extends Activity {
                     Vibrator vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
                     vibrator.vibrate(500);
                 }
-                new QueryLocation().query(mActivity, phonenum, mHandler);
+                new QueryLocationDao().query(mActivity, phonenum, mHandler);
             }
         });
         // 文本改变监视器
@@ -71,7 +71,7 @@ public class AToolsQueryLocationActivity extends Activity {
             @Override
             public void afterTextChanged(Editable s) {
                 String phonenum = etInputPhone.getText().toString().trim();
-                QueryLocation.query(mActivity, phonenum, mHandler);
+                QueryLocationDao.query(mActivity, phonenum, mHandler);
             }
         });
 

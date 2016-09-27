@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_set_position"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7dbab9b9"
+    tools:context="com.kk.mymobilesafe.activity.SetPositionActivity">
+
+    <ImageView
+        android:id="@+id/iv_settingCenter_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drag" />
+
+    <Button
+        android:id="@+id/btn_settingCenter_setposition_top_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/call_locate_blue"
+        android:clickable="false"
+        android:focusable="false"
+        android:text="拖拽图标设定来电显示窗体位置" />
+
+    <Button
+        android:id="@+id/btn_settingCenter_setposition_bottom_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/call_locate_blue"
+        android:clickable="false"
+        android:focusable="false"
+        android:text="拖拽图标设定来电显示窗体位置" />
+</RelativeLayout>

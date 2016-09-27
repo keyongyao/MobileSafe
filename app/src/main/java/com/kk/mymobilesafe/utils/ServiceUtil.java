@@ -13,15 +13,15 @@ import java.util.List;
 public class ServiceUtil {
     /**
      * @param activity
-     * @param clazz    服务的类名
+     * @param clazzPkg    服务的类名
      * @return true: running
      */
-    public static boolean checkRunning(Activity activity, String clazz) {
+    public static boolean checkRunning(Activity activity, String clazzPkg) {
         ActivityManager service = (ActivityManager) activity.getSystemService(Service.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> runningServices = service.getRunningServices(500);
         for (ActivityManager.RunningServiceInfo ss : runningServices
                 ) {
-            if (ss.service.getClassName().equals(clazz)) {
+            if (ss.service.getClassName().equals(clazzPkg)) {
                 return true;
             }
         }

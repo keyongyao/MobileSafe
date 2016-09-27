@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MobileSafe.iml" filepath="$PROJECT_DIR$/MobileSafe.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rocket/rocket.iml" filepath="$PROJECT_DIR$/rocket/rocket.iml" />
     </modules>
   </component>
 </project>

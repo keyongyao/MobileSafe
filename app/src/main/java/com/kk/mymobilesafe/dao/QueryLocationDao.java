@@ -13,7 +13,7 @@ import com.kk.mymobilesafe.signle.MySignal;
  * Created by Administrator on 2016/9/24.
  */
 
-public class QueryLocation {
+public class QueryLocationDao {
     /**
      * @param context        在那个activity 执行的查询
      * @param incommingPhone 要查询的号码
@@ -55,17 +55,19 @@ public class QueryLocation {
                             message.what = MySignal.ATool.QUERYRESULT;
                             message.obj = "报警";
                             handler.sendMessage(message);
+                            return;
 
                         case "120":
                             message.what = MySignal.ATool.QUERYRESULT;
                             message.obj = "急救";
                             handler.sendMessage(message);
+                            return;
 
                         case "119":
                             message.what = MySignal.ATool.QUERYRESULT;
                             message.obj = "火警";
                             handler.sendMessage(message);
-
+                            return;
                     }
                 }
                 if (TextUtils.isEmpty(location)) {

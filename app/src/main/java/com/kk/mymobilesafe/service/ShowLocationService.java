@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -17,9 +18,9 @@ import android.widget.Toast;
 
 import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.constant.Constant;
-import com.kk.mymobilesafe.dao.QueryLocation;
+import com.kk.mymobilesafe.dao.QueryLocationDao;
 import com.kk.mymobilesafe.signle.MySignal;
-import com.kk.mymobilesafe.utils.LogCat;
+import com.kk.mymobilesafe.utils.LogCatUtil;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 
 /**
@@ -47,6 +48,8 @@ public class ShowLocationService extends Service {
             }
         }
     };
+    PhoneStateListener stateListener;
+    TelephonyManager service;
 
     @Nullable
     @Override
@@ -57,35 +60,38 @@ public class ShowLocationService extends Service {
     @Override
     public void onCreate() {
         // 监视 电话的状态
-        TelephonyManager service = (TelephonyManager) getSystemService(Service.TELEPHONY_SERVICE);
-        service.listen(new PhoneStateListener() {
+        service = (TelephonyManager) getSystemService(Service.TELEPHONY_SERVICE);
+
+        service.listen((stateListener = new PhoneStateListener() {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 switch (state) {
                     case TelephonyManager.CALL_STATE_IDLE: {
-                        LogCat.getSingleton().i(TAG, "CALL_STATE_IDLE");
+                        LogCatUtil.getSingleton().i(TAG, "CALL_STATE_IDLE");
                         reMoveMyToast();
                         break;
                     }
                     case TelephonyManager.CALL_STATE_OFFHOOK: {
-                        LogCat.getSingleton().i(TAG, "CALL_STATE_OFFHOOK:" + incomingNumber);
+                        LogCatUtil.getSingleton().i(TAG, "CALL_STATE_OFFHOOK:" + incomingNumber);
                         Toast.makeText(ShowLocationService.this, incomingNumber, Toast.LENGTH_LONG).show();
                         showMyToast(incomingNumber);
                         break;
                     }
                     case TelephonyManager.CALL_STATE_RINGING: {
-                        LogCat.getSingleton().i(TAG, "CALL_STATE_RINGING");
+                        LogCatUtil.getSingleton().i(TAG, "CALL_STATE_RINGING");
                         break;
                     }
                 }
                 super.onCallStateChanged(state, incomingNumber);
             }
-        }, PhoneStateListener.LISTEN_CALL_STATE);
+        }), PhoneStateListener.LISTEN_CALL_STATE);
         super.onCreate();
+
+        // 土司的触摸事件
     }
 
     private void reMoveMyToast() {
-        if (windowManager != null && textView != null) {
+        if (windowManager != null && textView != null && mytoast != null) {
             windowManager.removeView(mytoast);
         }
     }
@@ -93,27 +99,86 @@ public class ShowLocationService extends Service {
     private void showMyToast(String incomingNumber) {
         // 自定义Toast
         WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();
-        WindowManager.LayoutParams params = mParams;
+        final WindowManager.LayoutParams params = mParams;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         params.format = PixelFormat.TRANSLUCENT;
         params.type = WindowManager.LayoutParams.TYPE_TOAST;
         params.setTitle("Toast");
-        params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+        params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+        //              | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;  使其可触摸
         params.gravity = Gravity.TOP + Gravity.LEFT;
         mytoast = View.inflate(getApplicationContext(), R.layout.mytoast, null);
         textView = (TextView) mytoast.findViewById(R.id.tv_myToast);
         // 读取用户配置的样式
         int sytleID = SharedPreferenceUtil.getInt(getApplicationContext(), Constant.SettingCenter.CHOOSESTYLRID);
         textView.setBackgroundResource(Constant.SettingCenter.STYLEID[sytleID]);
-        QueryLocation.query(getApplicationContext(), incomingNumber, handler);
+        QueryLocationDao.query(getApplicationContext(), incomingNumber, handler);
         windowManager = (WindowManager) getSystemService(Service.WINDOW_SERVICE);
+        params.x = SharedPreferenceUtil.getInt(getApplicationContext(), Constant.SettingCenter.LOCATIONX);
+        params.y = SharedPreferenceUtil.getInt(getApplicationContext(), Constant.SettingCenter.LOCATIONY);
+
         windowManager.addView(mytoast, params);
+        // 设置 触摸事件
+        mytoast.setOnTouchListener(new View.OnTouchListener() {
+            // 事件的起始坐标
+            int startY;
+            int startX;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        // 点击时 的坐标
+                        startX = (int) event.getRawX();
+                        startY = (int) event.getRawY();
+                        break;
+                    }
+                    case MotionEvent.ACTION_MOVE: {
+                        // 移动后的坐标
+                        int moveX = (int) event.getRawX();
+                        int moveY = (int) event.getRawY();
+                        // 实际要移动的坐标差
+                        int disX = moveX - startX;
+                        int disY = moveY - startY;
+
+                        // 控件应该移动到的位置
+                        params.x = params.x + disX;
+                        params.y = params.y + disY;
+
+                        // 不让控件跑到屏幕外边去 返回 不更新
+
+
+                        // 设置 控件的位置
+
+                        windowManager.updateViewLayout(mytoast, params);
+
+                        startX = (int) event.getRawX();
+                        startY = (int) event.getRawY();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        // 保存 控件的当前位置
+                        SharedPreferenceUtil.putInt(getApplicationContext(), Constant.SettingCenter.LOCATIONX, params.x);
+                        SharedPreferenceUtil.putInt(getApplicationContext(), Constant.SettingCenter.LOCATIONY, params.y);
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    // 不注销监听事件会一直监听下去，导致即使关闭服务，也显示来电窗体。
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        service.listen(stateListener, PhoneStateListener.LISTEN_NONE);
     }
 }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.constant.Constant;
-import com.kk.mymobilesafe.utils.LogCat;
+import com.kk.mymobilesafe.utils.LogCatUtil;
 import com.kk.mymobilesafe.utils.MyDeviceManager;
 import com.kk.mymobilesafe.utils.PhoneLocation;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
@@ -58,13 +58,13 @@ public class PhoneGuardOverViewActivity extends Activity {
             @Override
             public void onClick(View v) {
                 PhoneLocation.getLocation(mActivity);
-                LogCat.getSingleton().i(TAG, "请求获取经纬度");
+                LogCatUtil.getSingleton().i(TAG, "请求获取经纬度");
             }
         });
         tv_playAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogCat.getSingleton().i(TAG, "请求播放警报");
+                LogCatUtil.getSingleton().i(TAG, "请求播放警报");
                 MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.ylzs);
                 player.setLooping(true);
                 player.start();
@@ -74,21 +74,21 @@ public class PhoneGuardOverViewActivity extends Activity {
         tv_activte_device_manager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogCat.getSingleton().i(TAG, "请求激活我的设备管理器");
+                LogCatUtil.getSingleton().i(TAG, "请求激活我的设备管理器");
                 myDeviceManager.activte();
             }
         });
         tv_wipedata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogCat.getSingleton().i(TAG, "请求擦除数据");
+                LogCatUtil.getSingleton().i(TAG, "请求擦除数据");
                 myDeviceManager.wipeData();
             }
         });
         tv_lockscreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogCat.getSingleton().i(TAG, "请求锁屏");
+                LogCatUtil.getSingleton().i(TAG, "请求锁屏");
                 myDeviceManager.lockScreen();
             }
         });

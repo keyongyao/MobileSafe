@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.handler.HandlerLuancher;
-import com.kk.mymobilesafe.utils.LogCat;
+import com.kk.mymobilesafe.utils.LogCatUtil;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
-import com.kk.mymobilesafe.utils.Version;
+import com.kk.mymobilesafe.utils.VersionUtil;
 
 public class LauncherActivity extends Activity {
-    public Version mVersion;
+    public VersionUtil mVersion;
     Handler mHandler;
     Activity mActivity;
     RelativeLayout root;
@@ -26,10 +26,10 @@ public class LauncherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         //  TODO 开启日志猫
-        LogCat.getSingleton().setLog_open(true);
+        LogCatUtil.getSingleton().setLog_open(true);
         mActivity = this;
         mHandler = new HandlerLuancher(mActivity);
-        mVersion = new Version(mHandler, mActivity);
+        mVersion = new VersionUtil(mHandler, mActivity);
 
         initUI();
 

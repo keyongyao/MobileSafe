@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.kk.mymobilesafe.activity.AToolsActivity;
+import com.kk.mymobilesafe.activity.BlackNumActivity;
 import com.kk.mymobilesafe.activity.SettingCenterActivity;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.dialog.PhoneGuardPwdDialog;
-import com.kk.mymobilesafe.utils.LogCat;
+import com.kk.mymobilesafe.utils.LogCatUtil;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 
 /**
@@ -20,11 +21,11 @@ import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 public class GridItemListener implements AdapterView.OnItemClickListener {
     private static final String TAG = "main";
     Activity mActivity;
-    LogCat logCat;
+    LogCatUtil logCat;
 
     public GridItemListener(Activity mActivity) {
         this.mActivity = mActivity;
-        logCat = LogCat.getSingleton();
+        logCat = LogCatUtil.getSingleton();
     }
 
     @Override
@@ -44,7 +45,7 @@ public class GridItemListener implements AdapterView.OnItemClickListener {
             }
             case "通讯卫士": {
                 logCat.i(TAG, "GridItemListener.onItemClick: 通讯卫士");
-
+                mActivity.startActivity(new Intent(mActivity, BlackNumActivity.class));
                 break;
             }
             case "软件管家": {

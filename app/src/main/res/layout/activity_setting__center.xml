@@ -36,6 +36,22 @@
         android:layout_height="wrap_content"
         mobilesafe:subTitle="透明"
         mobilesafe:title="设置归属地显示风格">
-
     </com.kk.mymobilesafe.view.SettingChooseView>
+
+    <com.kk.mymobilesafe.view.SettingChooseView xmlns:mobilesafe="http://schemas.android.com/apk/res/com.kk.mymobilesafe"
+        android:id="@+id/scv_settingCenter_setPhoneAddrTipPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        mobilesafe:subTitle="点击设置"
+        mobilesafe:title="来电归属地提示框位置"></com.kk.mymobilesafe.view.SettingChooseView>
+
+    <com.kk.mymobilesafe.view.SettingCheckBoxItemView xmlns:mobilesafe="http://schemas.android.com/apk/res/com.kk.mymobilesafe"
+        android:id="@+id/scbiv_balcknum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        mobilesafe:close="关闭"
+        mobilesafe:itemTitle="黑名单拦截设置"
+        mobilesafe:open="开启">
+
+    </com.kk.mymobilesafe.view.SettingCheckBoxItemView>
 </LinearLayout>

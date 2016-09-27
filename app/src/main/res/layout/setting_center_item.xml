@@ -7,13 +7,13 @@
     <TextView
         android:id="@+id/tv_setting_item_title"
         style="@style/setting_item_style"
-        android:text="自动检查更新" />
+        android:text="Title" />
 
     <TextView
         android:id="@+id/tv_closeOropen"
         style="@style/setting_item_style"
         android:layout_below="@id/tv_setting_item_title"
-        android:text="关闭" />
+        android:text="subTitle" />
 
     <CheckBox
         android:id="@+id/cb_switch"

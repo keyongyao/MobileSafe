@@ -10,7 +10,7 @@ import com.kk.mymobilesafe.R;
 /**
  * 一个广播接收者DeviceAdminReceiver的子类
  */
-public class DeviceAdminSample extends DeviceAdminReceiver {
+public class DeviceAdminSampleRecevier extends DeviceAdminReceiver {
 
 
     void showToast(Context context, String msg) {

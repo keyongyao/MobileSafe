@@ -9,7 +9,7 @@ import java.io.OutputStream;
  * Created by Administrator on 2016/9/23.
  */
 
-public class CopyFile {
+public class CopyFileUtil {
     /**
      * @param inputStream  文件输入流
      * @param outputStream 文件输出流
