@@ -19,6 +19,7 @@ import com.kk.mymobilesafe.service.BlackSMSService;
 import com.kk.mymobilesafe.service.ShowLocationService;
 import com.kk.mymobilesafe.utils.CopyFileUtil;
 import com.kk.mymobilesafe.utils.LogCatUtil;
+import com.kk.mymobilesafe.utils.ServiceUtil;
 import com.kk.mymobilesafe.utils.SharedPreferenceUtil;
 import com.kk.mymobilesafe.utils.VersionUtil;
 
@@ -53,6 +54,11 @@ public class LauncherActivity extends Activity {
         if (openincommingShowLocation) {
             initPhoneDB();
             startService(new Intent(getApplicationContext(), ShowLocationService.class));
+        } else {
+            boolean running = ServiceUtil.checkRunning(mActivity, "com.kk.mymobilesafe.service.ShowLocationService");
+            if (running) {
+                stopService(new Intent(getApplicationContext(), ShowLocationService.class));
+            }
         }
         // 自动更新服务配置
         if (SharedPreferenceUtil.getBoolean(mActivity.getApplicationContext(), Constant.Setting.AUTOUPDATE)) {
@@ -68,9 +74,10 @@ public class LauncherActivity extends Activity {
             }, 2000);
         }
         boolean isOpenBlackNum = SharedPreferenceUtil.getBoolean(this, Constant.SettingCenter.BLACKNUMOPEN);
-        startService(new Intent(getApplicationContext(), BlackSMSService.class));
-        startService(new Intent(getApplicationContext(), BlackCallService.class));
-
+        if (isOpenBlackNum) {
+            startService(new Intent(getApplicationContext(), BlackSMSService.class));
+            startService(new Intent(getApplicationContext(), BlackCallService.class));
+        }
     }
 
     private void initPhoneDB() {

@@ -26,6 +26,8 @@ import java.lang.reflect.Method;
 
 public class BlackCallService extends Service {
     String incommingPhone;
+    MyPhoneStateListener stateListener;
+    TelephonyManager telephonyManager;
 
     @Nullable
     @Override
@@ -36,9 +38,17 @@ public class BlackCallService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Service.TELEPHONY_SERVICE);
-        telephonyManager.listen(new MyPhoneStateListener(getApplicationContext()), PhoneStateListener.LISTEN_CALL_STATE);
+        telephonyManager = (TelephonyManager) getSystemService(Service.TELEPHONY_SERVICE);
+        stateListener = new MyPhoneStateListener(getApplicationContext());
+        telephonyManager.listen(stateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        telephonyManager.listen(stateListener, PhoneStateListener.LISTEN_NONE);
+        stateListener.unRegisterContentObserver();
     }
 }
 
@@ -46,6 +56,8 @@ public class BlackCallService extends Service {
 class MyPhoneStateListener extends PhoneStateListener {
     private static final String TAG = "main";
     Context mContext;
+    ContentResolver resolver;
+    ContentObserver contentObserver;
 
     public MyPhoneStateListener(Context mContext) {
         this.mContext = mContext;
@@ -70,6 +82,7 @@ class MyPhoneStateListener extends PhoneStateListener {
                 Method method = clazz.getMethod("getService", String.class);
                 //3,反射调用此方法
                 IBinder iBinder = (IBinder) method.invoke(null, Context.TELEPHONY_SERVICE);
+
                 ITelephony iTelephony = ITelephony.Stub.asInterface(iBinder);
                 iTelephony.endCall();
             } catch (ClassNotFoundException e) {
@@ -83,8 +96,8 @@ class MyPhoneStateListener extends PhoneStateListener {
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
-            final ContentResolver resolver = mContext.getContentResolver();
-            ContentObserver tmp = new ContentObserver(new Handler()) {
+            resolver = mContext.getContentResolver();
+            contentObserver = new ContentObserver(new Handler()) {
                 @Override
                 public void onChange(boolean selfChange) {
                     super.onChange(selfChange);
@@ -93,9 +106,17 @@ class MyPhoneStateListener extends PhoneStateListener {
                     resolver.delete(CallLog.Calls.CONTENT_URI, "number=?", new String[]{incomingNumber});
                 }
             };
-            resolver.registerContentObserver(CallLog.Calls.CONTENT_URI, true, tmp);
-
+            resolver.registerContentObserver(CallLog.Calls.CONTENT_URI, true, contentObserver);
         }
     }
+
+    /**
+     * 取消注册 内容观察者
+     */
+    public void unRegisterContentObserver() {
+        resolver.unregisterContentObserver(contentObserver);
+    }
+
 }
+
 
