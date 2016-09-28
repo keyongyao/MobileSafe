@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.kk.mymobilesafe.activity.AToolsActivity;
+import com.kk.mymobilesafe.activity.AppManagerActivity;
 import com.kk.mymobilesafe.activity.BlackNumActivity;
 import com.kk.mymobilesafe.activity.SettingCenterActivity;
 import com.kk.mymobilesafe.constant.Constant;
@@ -50,7 +51,7 @@ public class GridItemListener implements AdapterView.OnItemClickListener {
             }
             case "软件管家": {
                 logCat.i(TAG, "GridItemListener.onItemClick: 软件管家");
-
+                mActivity.startActivity(new Intent(mActivity, AppManagerActivity.class));
                 break;
             }
             case "进程管理": {
