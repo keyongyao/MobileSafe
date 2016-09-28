@@ -2,9 +2,13 @@ package com.kk.mymobilesafe.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -14,10 +18,14 @@ import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kk.mymobilesafe.R;
 import com.kk.mymobilesafe.bean.AppInfoBean;
@@ -27,6 +35,8 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.kk.mymobilesafe.R.id.tv_appmanager_popupWindow_share;
 
 public class AppManagerActivity extends ActionBarActivity {
     private static final int LOADINGFINISHED = 99;  // 加载完App
@@ -78,13 +88,111 @@ public class AppManagerActivity extends ActionBarActivity {
                     showAppTypeCount.setText("系统程序: " + sysAppList.size());
                     LogCatUtil.getSingleton().i("main", " firstVisibleItem userAppList.size() :" + firstVisibleItem + " " + userAppList.size());
                 } else if (firstVisibleItem >= 1) {
-                    showAppTypeCount.setVisibility(View.VISIBLE);
                     showAppTypeCount.setText("用户程序: " + userAppList.size());
-                } else if (firstVisibleItem == 0) {
-                    showAppTypeCount.setVisibility(View.INVISIBLE);
                 }
             }
         });
+        // 添加 卸载  启动  分享  pupopWindow
+        lvAppList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // 2 个 文本 和系统应用不能  弹出菜单
+                if (position == 0 || position == userAppList.size() + 1) {
+                    return false;
+                } else {
+                    showPopupWindow(view, position, id);
+                }
+
+                return false;
+            }
+
+
+        });
+    }
+
+    // 弹出 窗体  设置 窗体内控件的事件
+    private void showPopupWindow(View view, int position, long id) {
+        View contentView = View.inflate(mActivty, R.layout.layout_popup_window, null);
+        PopupWindow popupWindow = new PopupWindow(contentView,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                true);
+        setSubViewLinstener(contentView, popupWindow, position);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.alpha(Color.TRANSPARENT)));
+        popupWindow.showAsDropDown(view, 300, -view.getHeight());
+    }
+
+    // 设置 popup菜单的事件
+    private void setSubViewLinstener(View contentView, final PopupWindow popupWindow, final int position) {
+        TextView uninstall = (TextView) contentView.findViewById(R.id.tv_appmanager_popupWindow_uninstall);
+        TextView start = (TextView) contentView.findViewById(R.id.tv_appmanager_popupWindow_start);
+        TextView share = (TextView) contentView.findViewById(tv_appmanager_popupWindow_share);
+        // 卸载 APP
+        uninstall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                // 系统的应用不能卸载
+                if (position > userAppList.size() + 1) {
+                    Toast.makeText(mActivty, "系统应用不能卸载", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String pkgName = userAppList.get(position - 1).pkgName;
+                uninstallApp(pkgName);
+                Toast.makeText(mActivty, "uninstall:" + userAppList.get(position - 1).name, Toast.LENGTH_SHORT).show();
+            }
+        });
+        // 启动 APP
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                if (position < userAppList.size() + 2) {
+                    Toast.makeText(mActivty, "start " + userAppList.get(position - 1).name, Toast.LENGTH_SHORT).show();
+                    String pkgName = userAppList.get(position - 1).pkgName;
+                    startApp(pkgName);
+                } else if (position >= userAppList.size() + 2) {
+                    Toast.makeText(mActivty, "start " + sysAppList.get(position - userAppList.size() - 2).name, Toast.LENGTH_SHORT).show();
+                    String pkgName = sysAppList.get(position - userAppList.size() - 2).pkgName;
+                    startApp(pkgName);
+                }
+
+            }
+        });
+        // 分享 APP
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                if (position < userAppList.size() + 2) {
+                    Toast.makeText(mActivty, "share " + userAppList.get(position - 1).name, Toast.LENGTH_SHORT).show();
+                    shareApp(userAppList.get(position - 1).name);
+                } else if (position >= userAppList.size() + 2) {
+                    Toast.makeText(mActivty, "share " + sysAppList.get(position - userAppList.size() - 2).name, Toast.LENGTH_SHORT).show();
+                    shareApp(sysAppList.get(position - userAppList.size() - 2).name);
+                }
+            }
+        });
+    }
+
+    private void uninstallApp(String pkgName) {
+        Intent intent = new Intent("android.intent.action.DELETE");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.setData(Uri.parse("package:" + pkgName));
+        startActivity(intent);
+    }
+
+    private void startApp(String pkgName) {
+        PackageManager pm = getPackageManager();
+        Intent launchIntentForPackage = pm.getLaunchIntentForPackage(pkgName);
+        startActivity(launchIntentForPackage);
+    }
+
+    private void shareApp(String appName) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, "分享一个应用,应用名称为" + appName);
+        intent.setType("text/plain");
+        startActivity(intent);
     }
 
     /**
@@ -159,7 +267,6 @@ public class AppManagerActivity extends ActionBarActivity {
         tvExtraStorage.setText(tvExtraStorage.getText().toString() + extrafreesize);
         lvAppList = (ListView) findViewById(R.id.lv_appManager_applistview);
         showAppTypeCount = (TextView) findViewById(R.id.tv_appmanager_showAppTypeCount);
-        showAppTypeCount.setVisibility(View.INVISIBLE);
         showProgressDialog();
     }
 
