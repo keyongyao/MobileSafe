@@ -380,12 +380,12 @@ public class AppManagerActivity extends ActionBarActivity {
             return isUserApp ? "用户程序" : "系统程序";
         }
 
-        class Holder {
+        private class Holder {
             ImageView icon;
             TextView title, subTitle;
         }
 
-        class HolderText {
+        private class HolderText {
             TextView textView;
         }
 

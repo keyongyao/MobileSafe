@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import com.kk.mymobilesafe.activity.AToolsActivity;
 import com.kk.mymobilesafe.activity.AppManagerActivity;
 import com.kk.mymobilesafe.activity.BlackNumActivity;
+import com.kk.mymobilesafe.activity.ProcessManagerActivity;
 import com.kk.mymobilesafe.activity.SettingCenterActivity;
 import com.kk.mymobilesafe.constant.Constant;
 import com.kk.mymobilesafe.dialog.PhoneGuardPwdDialog;
@@ -56,7 +57,7 @@ public class GridItemListener implements AdapterView.OnItemClickListener {
             }
             case "进程管理": {
                 logCat.i(TAG, "GridItemListener.onItemClick: 进程管理");
-
+                mActivity.startActivity(new Intent(mActivity, ProcessManagerActivity.class));
                 break;
             }
             case "流量统计": {
